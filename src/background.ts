@@ -1,8 +1,9 @@
+// (window as any).ComfyJS.Init('brandontroberts');
 
-function polling() {
-    console.log('polling');
-    setTimeout(polling, 1000 * 30);
-}
-
-polling();
-
+(chrome as any).extension.onConnect.addListener(function(port) {
+    console.log("Connected .....");
+    port.onMessage.addListener(function(msg) {
+        console.log("message recieved " + msg);
+        port.postMessage("Hi Popup.js");
+    });
+});

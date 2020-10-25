@@ -1,3 +1,30 @@
+const ComfyJS = (window as any).ComfyJS;;
+
+ComfyJS.Init('brandontroberts');
+
+ComfyJS.onChat = (user: string, messageText: string) => {
+    console.log(user + '+' + messageText);
+
+    setTimeout(() => {
+        const messages: HTMLDivElement[] = Array.from(document.querySelectorAll('div[class^=PlatformCommentShell__Wrap]'))
+        const message = messages.pop();
+        message.querySelector('button').click();
+        let bp = false;
+        if (messageText.includes('boilerplate')) {
+            (document.querySelector('img[alt="boilerplate"]') as HTMLImageElement).click();
+            bp = true;
+        }        
+    
+        const interval = setInterval(() => {
+            message.querySelector('button').click();
+            if(bp) {
+                (document.querySelector('img[alt="boilerplate"]') as HTMLImageElement).click();
+                bp = false;   
+            }
+            clearInterval(interval);
+        }, 2000);
+    }, 2000);
+}
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     debugger;
@@ -8,7 +35,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     } else {
         sendResponse('Color message is none.');
     }
-
+/**
     if (msg.type && msg.type === '[StreamYard] Show Message') {
         // const messages: HTMLButtonElement[] = Array.from(document.querySelectorAll('button[aria-label="Show comment in broadcast"]'));
         const messages: HTMLDivElement[] = Array.from(document.querySelectorAll('div[class^=PlatformCommentShell__Wrap]'))
@@ -48,5 +75,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 
         sendResponse('clicked');
     }
+*/
 });
 

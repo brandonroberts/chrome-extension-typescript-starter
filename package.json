@@ -16,6 +16,7 @@
     "url": "https://github.com/chibat/chrome-extension-typescript-starter.git"
   },
   "dependencies": {
+    "comfy.js": "^1.1.5",
     "jquery": "^3.5.0",
     "moment": "~2.24.0"
   },

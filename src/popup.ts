@@ -1,7 +1,23 @@
 import * as moment from 'moment';
 import * as $ from 'jquery';
 
+declare var ComfyJS: any;
+
 let count = 0;
+
+// ComfyJS.Init('brandontroberts');
+
+// ComfyJS.onChat = (user: string, message: string) => {
+//   console.log('chat');
+// }
+
+var port = (chrome as any).extension.connect({
+  name: "Sample Communication"
+});
+port.postMessage("Hi BackGround");
+port.onMessage.addListener(function(msg) {
+  console.log("message recieved" + msg);
+});
 
 $(function() {
   const queryInfo = {
